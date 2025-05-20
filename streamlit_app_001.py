@@ -3,12 +3,14 @@ import mlflow.sklearn
 import numpy as np
 
 st.title("Predicción de Diabetes")
+st.title("Edwin Patricio Guamán Hidalgo")
 
 # Configurar conexión con MLflow Tracking Server
-pass
+mlflow.set_tracking_uri("http://localhost:9090") # cambiar en función de su servidor
 
 # Cargar modelo desde el Model Registry, revise el ejemplo de flask
-pass
+model = mlflow.sklearn.load_model("models:/Mod2/1") # cambiar en función de su modelo
+
 
 # Deslizadores para cada input del modelo
 pregnancies = st.slider("Número de embarazos", 0, 20, 1)
@@ -27,3 +29,5 @@ if st.button("Predecir"):
     pred = model.predict(entrada)[0]
     st.markdown("### Resultado:")
     st.success("Tiene diabetes" if pred == 1 else "No tiene diabetes")
+
+
